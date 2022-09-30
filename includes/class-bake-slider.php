@@ -78,6 +78,7 @@ class Bake_Slider {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->register_custom_post_type();
 
 	}
 
@@ -110,17 +111,23 @@ class Bake_Slider {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bake-slider-i18n.php';
-
+	
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-bake-slider-admin.php';
-
+		
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bake-slider-public.php';
+		
+		/**
+		 * The class responsible for registering the custom post type
+		 * of the plugin.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bake-slider-cpt.php';
 
 		$this->loader = new Bake_Slider_Loader();
 
@@ -172,6 +179,25 @@ class Bake_Slider {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register the custom post type of the plugin
+	 *
+	 * Uses the Bake_Slider_Post_Type class in order to setup the custom post type
+	 * with WordPress.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function register_custom_post_type() {
+
+		$post_type = new Bake_Slider_Post_Type();
+
+		$this->loader->add_action( 'init', $post_type, 'create_post_type' );
+		$this->loader->add_action( 'add_meta_boxes', $post_type, 'add_meta_boxes' );
+		$this->loader->add_action( 'save_post_bake-slider', $post_type, 'save_post', 10, 2 );
 
 	}
 

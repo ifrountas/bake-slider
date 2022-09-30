@@ -30,6 +30,7 @@ class Bake_Slider_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		update_option( 'rewrite_rules', '' );
 
 	}
 

@@ -30,7 +30,8 @@ class Bake_Slider_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-
+		flush_rewrite_rules();
+		unregister_post_type( 'bake-slider' );
 	}
 
 }
