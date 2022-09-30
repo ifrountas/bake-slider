@@ -60,6 +60,34 @@ class Bake_Slider_Post_Type {
     }
 
 
+    public function bake_slider_cpt_columns( $columns ) {
+
+        $columns['bake_slider_link_text'] = esc_html__( 'Link Text', 'bake-slider' );
+        $columns['bake_slider_link_url'] = esc_html__( 'Link URL', 'bake-slider' );
+        return $columns;
+
+    }
+
+    public function bake_slider_cpt_custom_columns( $column, $post_id ) {
+
+        switch( $column ){
+            case 'bake_slider_link_text':
+                echo esc_html( get_post_meta( $post_id, 'bake_slider_link_text', true ) );
+                break;
+            case 'bake_slider_link_url':
+                echo esc_url( get_post_meta( $post_id, 'bake_slider_link_url', true ) );
+                break;
+        }
+
+    }
+
+    public function bake_slider_sortable_columns( $columns ) {
+
+        $columns['bake_slider_link_text'] = 'bake_slider_link_text';
+        return $columns;
+
+    }
+
     public function add_meta_boxes() {
         add_meta_box( 
             'bake_slider_meta_box', 

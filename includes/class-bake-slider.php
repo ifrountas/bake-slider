@@ -198,6 +198,9 @@ class Bake_Slider {
 		$this->loader->add_action( 'init', $post_type, 'create_post_type' );
 		$this->loader->add_action( 'add_meta_boxes', $post_type, 'add_meta_boxes' );
 		$this->loader->add_action( 'save_post_bake-slider', $post_type, 'save_post', 10, 2 );
+		$this->loader->add_filter( 'manage_bake-slider_posts_columns', $post_type, 'bake_slider_cpt_columns' );
+		$this->loader->add_action( 'manage_bake-slider_posts_custom_column', $post_type, 'bake_slider_cpt_custom_columns', 10 , 2 );
+		$this->loader->add_filter( 'manage_edit-bake-slider_sortable_columns', $post_type, 'bake_slider_sortable_columns' );
 
 	}
 
