@@ -100,4 +100,65 @@ class Bake_Slider_Admin {
 
 	}
 
+
+	/**
+	 * Register the admin menu page of the plugin.
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_menu() {
+
+		add_menu_page(
+			'Bake Slider Options',
+			'BakeSlider',
+			'manage_options',
+			'bake_slider_admin',
+			array( $this, 'bake_slider_settings_page' ),
+			'dashicons-images-alt2'
+		);
+
+
+		add_submenu_page( 
+			'bake_slider_admin', 
+			'Manage Slides',
+			'Manage Slides',
+			'manage_options',
+			'edit.php?post_type=bake-slider',
+			null,
+			null
+		);
+
+		add_submenu_page( 
+			'bake_slider_admin', 
+			'Add New Slide',
+			'Add New Slide',
+			'manage_options',
+			'post-new.php?post_type=bake-slider',
+			null,
+			null
+		);
+
+
+	}
+
+	/**
+	 * Register the settings page of the plugin.
+	 *
+	 * @since    1.0.0
+	 */
+	public function bake_slider_settings_page() {
+
+		if ( ! current_user_can( 'manage_options') ) {
+			return;
+		}
+
+		if( isset( $_GET['settings-updated'] ) )  {
+			add_settings_error('bake_slider_options', 'bake_slider_message', 'Settings Saved', 'success');
+		}
+
+		settings_errors('bake_slider_options');
+		
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/bake-slider-settings-page.php';
+	}
+
 }
