@@ -73,7 +73,7 @@ class Bake_Slider_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bake-slider-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bake-slider-front.min.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,7 +96,7 @@ class Bake_Slider_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bake-slider-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bake-slider-front.min.js', array( 'jquery' ), $this->version, false );
 
 	}
 

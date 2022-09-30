@@ -80,6 +80,7 @@ class Bake_Slider {
 		$this->define_public_hooks();
 		$this->register_custom_post_type();
 		$this->settings();
+		$this->shortcode();
 
 	}
 
@@ -135,6 +136,13 @@ class Bake_Slider {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bake-slider-settings.php';
+
+
+		/**
+		 * The class responsible for registering the shortcodes of the plugin
+		 * of the plugin.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bake-slider-shortcode.php';
 
 		$this->loader = new Bake_Slider_Loader();
 
@@ -225,8 +233,26 @@ class Bake_Slider {
 	private function settings() {
 
 		$settings = new Bake_Slider_Settings();
-		
+
 		$this->loader->add_action( 'admin_init', $settings, 'admin_init' );
+
+	}
+
+
+	/**
+	 * Register the settings for the admin area of the plugin
+	 *
+	 * Uses the Bake_Slider_Settings class in order to manipulate the admin settings.
+	 * with WordPress.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function shortcode() {
+
+		$shortcode = new Bake_Slider_Shortcode();
+
+		return $shortcode;
 
 	}
 
