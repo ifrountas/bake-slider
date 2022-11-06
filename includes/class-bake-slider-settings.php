@@ -97,6 +97,25 @@ class Bake_Slider_Settings {
         );
 
 
+        add_settings_field(
+            'bake_slider_height',
+            __('Height of the Slider', 'bake-slider'),
+            array( $this, 'bake_slider_height_callback' ),
+            'bake_slider_page2',
+            'bake_slider_second_section',
+            array(
+                'items' => array(
+                    'twenty-five' => __('25vh', 'bake-slider'),
+                    'fifty' => __('50vh', 'bake-slider'),
+                    'hundred' => __('100vh', 'bake-slider'),
+                    'six-hundrend-fourty' => __('640px', 'bake-slider'),
+                    
+                ),
+                'label_for' => 'bake_slider_height'
+            )
+        );
+
+
     }
 
     public function bake_slider_shortcode_callback() {
@@ -141,6 +160,20 @@ class Bake_Slider_Settings {
             <select
                 id="bake_slider_style"
                 name="bake_slider_options[bake_slider_style]">
+                <?php foreach ( $args['items'] as $key => $value ) : ?>
+                    <option value="<?php echo $key; ?>" <?php isset( $style ) ? selected( $key, $style, true ) : ''; ?>><?php echo esc_html( $value ); ?></option>
+                <?php endforeach; ?>
+            </select>
+        <?php
+    }
+
+
+    public function bake_slider_height_callback( $args ) {
+        $style = self::$options['bake_slider_height'];
+        ?>
+            <select
+                id="bake_slider_height"
+                name="bake_slider_options[bake_slider_height]">
                 <?php foreach ( $args['items'] as $key => $value ) : ?>
                     <option value="<?php echo $key; ?>" <?php isset( $style ) ? selected( $key, $style, true ) : ''; ?>><?php echo esc_html( $value ); ?></option>
                 <?php endforeach; ?>

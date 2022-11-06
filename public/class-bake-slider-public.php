@@ -97,6 +97,7 @@ class Bake_Slider_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bake-slider-front.min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'bake-slider-init', plugin_dir_url( __FILE__ ) . 'js/bake-slider-init.js', array( 'jquery' ), $this->version, false );
 
 	}
 
